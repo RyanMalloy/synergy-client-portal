@@ -4,7 +4,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface Company {
   id: string;
@@ -15,7 +14,6 @@ interface Company {
 }
 
 export default function SettingsPage() {
-  const router = useRouter();
   const [company, setCompany] = useState<Company | null>(null);
   const [formData, setFormData] = useState({ name: '', billingEmail: '', billingAddress: '' });
   const [loading, setLoading] = useState(true);

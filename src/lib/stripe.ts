@@ -139,7 +139,7 @@ export async function cancelSubscriptionAtPeriodEnd(
  */
 export async function cancelSubscription(subscriptionId: string): Promise<Stripe.Subscription> {
   try {
-    const subscription = await stripe.subscriptions.del(subscriptionId);
+    const subscription = await stripe.subscriptions.cancel(subscriptionId);
     logSubscription('subscription_canceled', { subscriptionId });
     return subscription;
   } catch (error) {

@@ -43,7 +43,7 @@ export function generateToken(length: number = 32): string {
  * Create JWT token
  */
 export function createJWT(payload: Omit<SessionPayload, 'iat' | 'exp'>, expiresIn: string = '24h'): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: expiresIn as jwt.SignOptions['expiresIn'] });
 }
 
 /**

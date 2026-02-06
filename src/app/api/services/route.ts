@@ -8,7 +8,7 @@ import { handleError, successResponse } from '@/lib/errors';
 /**
  * GET /api/services - List all active services
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const services = await query(
       `SELECT id, name, description, base_price_cents, billing_cycle, features, tier, status

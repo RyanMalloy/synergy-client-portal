@@ -6,7 +6,7 @@ import { query } from '@/lib/db';
 import { hashPassword, createSession } from '@/lib/auth';
 import { createStripeCustomer } from '@/lib/stripe';
 import { validateInput, signupSchema } from '@/lib/validation';
-import { handleError, ConflictError, ValidationError, successResponse } from '@/lib/errors';
+import { handleError, successResponse } from '@/lib/errors';
 import { logAuth } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {

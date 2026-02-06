@@ -1,7 +1,7 @@
 // src/lib/db.ts
 // PostgreSQL connection pool and query helpers
 
-import { Pool, PoolClient, QueryResult } from 'pg';
+import { Pool, PoolClient, QueryResult, QueryResultRow } from 'pg';
 import { logger } from './logger';
 
 // Create a singleton pool instance
@@ -26,7 +26,7 @@ export function getPool(): Pool {
 /**
  * Execute a query and return results
  */
-export async function query<T = any>(
+export async function query<T extends QueryResultRow = QueryResultRow>(
   text: string,
   values?: any[]
 ): Promise<QueryResult<T>> {
@@ -42,7 +42,7 @@ export async function query<T = any>(
 /**
  * Execute a query and return first row
  */
-export async function queryOne<T = any>(
+export async function queryOne<T extends QueryResultRow = QueryResultRow>(
   text: string,
   values?: any[]
 ): Promise<T | null> {
