@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { queryOne } from '@/lib/db';
 import { verifyPassword, createSession } from '@/lib/auth';
 import { validateInput, loginSchema } from '@/lib/validation';
-import { handleError, AuthenticationError, successResponse } from '@/lib/errors';
+import { handleError, successResponse } from '@/lib/errors';
 import { logAuth } from '@/lib/logger';
 
 export async function POST(request: NextRequest) {
