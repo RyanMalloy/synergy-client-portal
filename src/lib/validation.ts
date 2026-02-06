@@ -102,13 +102,13 @@ export type CreateTicketInput = z.infer<typeof createTicketSchema>;
 /**
  * Validate input safely and return error message or parsed data
  */
-export async function validateInput<T>(
-  schema: z.ZodSchema,
+export async function validateInput<T extends z.ZodSchema>(
+  schema: T,
   data: unknown
-): Promise<{ success: true; data: T } | { success: false; errors: Record<string, string> }> {
+): Promise<{ success: true; data: z.infer<T> } | { success: false; errors: Record<string, string> }> {
   try {
     const parsed = await schema.parseAsync(data);
-    return { success: true, data: parsed as T };
+    return { success: true, data: parsed };
   } catch (error) {
     if (error instanceof z.ZodError) {
       const errors: Record<string, string> = {};
