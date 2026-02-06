@@ -1,0 +1,68 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Utility classes */
+.container {
+  @apply max-w-7xl mx-auto px-4;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+.btn-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow border border-gray-200;
+}
+
+.input {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.error-text {
+  @apply text-red-600 text-sm;
+}
+
+.success-text {
+  @apply text-green-600 text-sm;
+}
