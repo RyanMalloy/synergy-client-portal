@@ -1,4 +1,3 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,9 +9,30 @@
   margin: 0;
 }
 
-html, body {
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -26,43 +46,31 @@ button {
   font-family: inherit;
 }
 
-/* Utility classes */
-.container {
-  @apply max-w-7xl mx-auto px-4;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-.btn {
-  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+/* Focus states for accessibility */
+:focus-visible {
+  outline: 2px solid #0066FF;
+  outline-offset: 2px;
 }
 
-.btn-primary {
-  @apply bg-blue-600 text-white hover:bg-blue-700;
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-.btn-secondary {
-  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
-}
-
-.btn-danger {
-  @apply bg-red-600 text-white hover:bg-red-700;
-}
-
-.btn-sm {
-  @apply px-3 py-1 text-sm;
-}
-
-.card {
-  @apply bg-white rounded-lg shadow border border-gray-200;
-}
-
-.input {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
-}
-
-.error-text {
-  @apply text-red-600 text-sm;
-}
-
-.success-text {
-  @apply text-green-600 text-sm;
+.sr-only:not(:focus):not(:focus-within) {
+  display: none;
 }
