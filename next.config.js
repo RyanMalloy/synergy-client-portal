@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     unoptimized: true, // Optimize for static export if needed
     remotePatterns: [
@@ -50,7 +49,7 @@ const nextConfig = {
     ];
   },
   experimental: {
-    serverActions: true,
+    serverActions: {},
   },
 };
 

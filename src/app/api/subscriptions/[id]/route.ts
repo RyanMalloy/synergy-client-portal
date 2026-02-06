@@ -13,9 +13,10 @@ import { logSubscription, logAudit } from '@/lib/logger';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const companyId = request.headers.get('x-company-id');
     if (!companyId) {
       throw new AuthenticationError();
@@ -30,7 +31,7 @@ export async function GET(
        FROM subscriptions s
        JOIN services svc ON s.service_id = svc.id
        WHERE s.id = $1 AND s.company_id = $2`,
-      [params.id, companyId]
+      [id, companyId]
     );
 
     if (!subscription) {
@@ -49,9 +50,10 @@ export async function GET(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const companyId = request.headers.get('x-company-id');
     if (!companyId) {
       throw new AuthenticationError();
@@ -60,7 +62,7 @@ export async function DELETE(
     const subscription = await queryOne<{ stripe_subscription_id: string }>(
       `SELECT stripe_subscription_id FROM subscriptions
        WHERE id = $1 AND company_id = $2`,
-      [params.id, companyId]
+      [id, companyId]
     );
 
     if (!subscription) {
@@ -72,10 +74,10 @@ export async function DELETE(
 
     logSubscription('subscription_cancel_scheduled', {
       companyId,
-      subscriptionId: params.id,
+      subscriptionId: id,
     });
 
-    logAudit('subscription_canceled', 'subscription', params.id, { companyId });
+    logAudit('subscription_canceled', 'subscription', id, { companyId });
 
     return NextResponse.json(
       successResponse(
